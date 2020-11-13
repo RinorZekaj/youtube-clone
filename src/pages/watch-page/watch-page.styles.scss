@@ -1,0 +1,42 @@
+.watch-page-container {
+  width: 80%;
+  margin-left: 20%;
+  padding: 20px;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+
+  .video-holder {
+    width: 60%;
+    border: 1px solid green;
+    
+    .video-info {
+      text-align: left;
+
+      .video-title {
+        font-size: 20px;
+        font-weight: 500;
+      }
+
+      .video-views {
+        font-size: 14px;
+        color: rgb(59, 59, 59);
+      }
+    }
+
+    .video-player {
+      border: 1px solid blue;
+      width: 100%;
+    }
+
+    .video-footer {
+      text-align: left;
+
+      .channel-name {
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+  }
+
+}
