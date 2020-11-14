@@ -17,6 +17,7 @@ const videosReducer = (state = initial_state, action) => {
       return {
         ...state,
         videosData: action.payload,
+        isLoading: false
       };
     case VideoActionTypes.FETCH_VIDEOS_FAILED:
       return {

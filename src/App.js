@@ -6,8 +6,8 @@ import NavBar from "./components/nav-bar/nav-bar.component";
 import SideBar from "./components/side-bar/side-bar.component";
 import HomePage from "./pages/home-page/home-page.component";
 import SearchPage from './pages/search-page/search-page.component';
-import TrendingsPage from './pages/trendings-page/trendings-page.component'
 import WatchPage from './pages/watch-page/watch-page.component';
+import HistoryPage from './pages/history-page/history-page.component'
 
 function App() {
 
@@ -19,8 +19,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path='/search/:searchKey' component={SearchPage} />
-          <Route path="/trending" component={TrendingsPage} />
           <Route path='/watch/:videoId' component={WatchPage} />
+          <Route path='/history' component={HistoryPage} />
         </Switch>
       </main>
     </div>

@@ -5,11 +5,43 @@
   margin-bottom: 5px;
   color: #272727;
 
+  &:hover {
+    .thumbnail-holder {
+      .play-button {
+        display: flex;
+      }
+    }
+  }
+
   .thumbnail-holder {
     width: 40%;
+    position: relative;
 
-    img {
+    .duration {
+      position: absolute;
+      bottom: 8px;
+      right: 5px;
+      border-radius: 2px;
+      z-index: 100;
+      color: white;
+      padding-left: 5px;
+      padding-right: 5px;
+      font-size: 13px;
+      background-color: rgba(83, 83, 83, 0.7);
+    }
+
+    .suggestion {
       width: 100%;
+    }
+
+    .play-button {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      transform: translate(-50%, -50%);
+      opacity: 0.75;
     }
   }
 

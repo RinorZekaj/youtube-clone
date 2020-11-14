@@ -1,0 +1,23 @@
+.search-preview-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 5%;
+  
+  .search-item {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #000;
+    background-color: #c2c2c2;
+    padding: 4px 7px;
+    border-radius: 5px;
+
+    span {
+      margin-left: 10px;
+      background-color: #efefef;
+      padding-left: 8px;
+      padding-right: 8px;
+      border-radius: 5px;
+    }
+  }
+}

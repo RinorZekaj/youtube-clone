@@ -12,13 +12,6 @@ function SideBar() {
   return (
     <div className="side-bar-container">
       <SidebarItem Icon={HomeIcon} title="Home" route="/" />
-      <SidebarItem Icon={WhatshotIcon} title="Trending" route="/trending" />
-      <SidebarItem
-        Icon={SubscriptionsIcon}
-        title="Subscriptions"
-        route="/subscriptions"
-      />
-      <SidebarItem Icon={VideoLibraryIcon} title="Library" route="/library" />
       <SidebarItem Icon={HistoryIcon} title="History" route="/history" />
     </div>
   );

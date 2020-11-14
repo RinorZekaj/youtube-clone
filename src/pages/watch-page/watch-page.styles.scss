@@ -14,9 +14,10 @@
       .video-title {
         font-size: 20px;
         font-weight: 500;
+        margin-bottom: 0px;
       }
-
-      .video-views {
+      .video-stats {
+        display: flex;
         font-size: 14px;
         color: rgb(59, 59, 59);
       }
@@ -28,10 +29,17 @@
 
     .video-footer {
       text-align: left;
-
+      
       .channel-name {
         font-size: 18px;
         font-weight: 500;
+        text-decoration: none;
+        color: #000;
+      }
+
+      .show-more {
+        color: rgb(54, 54, 54);
+        cursor: pointer;
       }
     }
   }

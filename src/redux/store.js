@@ -1,42 +1,29 @@
 import { applyMiddleware, createStore, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
-import { videosSagas } from './videos/videos.sagas'
+import { videosSagas } from "./videos/videos.sagas";
 import videosReducer from "./videos/videos.reducer";
-import { logger } from 'redux-logger'
+import { logger } from "redux-logger";
+import historyReducer from "./history/history.reducer";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const initial_state = {
-  data: [
-    {
-      id: 1,
-      name: "rinor"
-    },
-    {
-      id: 2,
-      name: "musab"
-    },
-    {
-      id: 3,
-      name: "elion"
-    },
-  ]
-}
-
-const secondReducer = (state = initial_state, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
+const persistConfig = {
+  key: "root",
+  storage,
+  blacklist: ['videos']
+};
 
 const rootReducer = combineReducers({
   videos: videosReducer,
-  second: secondReducer
-})
+  history: historyReducer,
+});
 
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
+export const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = createStore(persistedReducer, applyMiddleware(sagaMiddleware, logger));
 
 sagaMiddleware.run(videosSagas);
 
-export default store;
+export const persistor = persistStore(store);

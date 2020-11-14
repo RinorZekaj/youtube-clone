@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import YouTubeIcon from "@material-ui/icons/YouTube";
@@ -9,15 +10,19 @@ import AppsIcon from "@material-ui/icons/Apps";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import "./nav-bar.styles.scss";
+import { addSearchHistory } from "../../redux/history/history.actions";
+import { v4 as uuid } from "uuid";
 
-function NavBar() {
+function NavBar({ addVideoSearch }) {
   const [searchValue, setSearchValue] = useState("");
   const history = useHistory();
 
   const submitSearchValue = () => {
     console.log(searchValue);
 
-    history.push(`/search/${searchValue}`)
+    addVideoSearch({ name: searchValue, id: uuid() });
+
+    history.push(`/search/${searchValue}`);
   };
 
   return (
@@ -53,4 +58,8 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+const mapDisptachToProps = (dispatch) => ({
+  addVideoSearch: (searchKey) => dispatch(addSearchHistory(searchKey)),
+});
+
+export default connect(null, mapDisptachToProps)(NavBar);

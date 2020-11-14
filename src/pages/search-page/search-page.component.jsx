@@ -9,7 +9,7 @@ import VideoOverview from "../../components/video-overview/video-overview.compon
 import { fetchVideosRequest } from '../../redux/videos/videos.actions'
 import { searchVideos } from "../../redux/videos/videos.selectors";
 
-function SearchPage({ fetchVideosRequest, items }) {
+function SearchPage({ fetchVideosRequest, items, clear }) {
   const searchValue = useParams().searchKey;
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchVideosRequest: (id) => dispatch(fetchVideosRequest(id)),
+  fetchVideosRequest: (id) => dispatch(fetchVideosRequest(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
