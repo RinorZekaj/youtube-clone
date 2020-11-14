@@ -1,7 +1,8 @@
 import { VideoActionTypes } from './videos.types';
  
-export const fetchVideosRequest = () => ({
-  type: VideoActionTypes.FETCH_VIDEOS_REQUEST
+export const fetchVideosRequest = (searchKey) => ({
+  type: VideoActionTypes.FETCH_VIDEOS_REQUEST,
+  payload: searchKey
 })
 
 export const fetchVideosSuccess = (videos) => ({

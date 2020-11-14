@@ -1,21 +1,20 @@
-import { yellow } from "@material-ui/core/colors";
 import { put, call, takeLatest, all } from "redux-saga/effects";
 
 import { VideoActionTypes } from './videos.types'
 import {
-  fetchVideosRequest,
   fetchVideosSuccess,
   fetchVideosFailed,
 } from "./videos.actions";
 import { fetchVideos } from "../../api/youtube.api";
 
-export function* fetchVideosAsync(searchValue) {
+export function* fetchVideosAsync(searchKey) {
+  console.log(searchKey.payload);
   try {
-    console.log(searchValue);
-    const response = yield fetchVideos(searchValue)
+    const response = yield fetchVideos(searchKey.payload)
     console.log(response);
+    yield put(fetchVideosSuccess(response))
   } catch (error) {
-
+    yield put(fetchVideosFailed(error))
   }
 }
 

@@ -2,7 +2,7 @@ import { VideoActionTypes } from "./videos.types";
 
 const initial_state = {
   isLoading: false,
-  videos: [],
+  videosData: [],
   error: null,
 };
 
@@ -16,7 +16,7 @@ const videosReducer = (state = initial_state, action) => {
     case VideoActionTypes.FETCH_VIDEOS_SUCCESS:
       return {
         ...state,
-        videos: [...state.videos, action.payload],
+        videosData: action.payload,
       };
     case VideoActionTypes.FETCH_VIDEOS_FAILED:
       return {
@@ -25,7 +25,7 @@ const videosReducer = (state = initial_state, action) => {
         error: action.payload,
       };
     default:
-      break;
+      return state;
   }
 };
 

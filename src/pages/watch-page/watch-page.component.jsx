@@ -1,26 +1,27 @@
-import Axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { format } from "friendly-numbers";
-
-import { getVideoDetailsUrlString } from "../../api/youtube.api";
+import { connect } from "react-redux";
 
 import "./watch-page.styles.scss";
 import VideosPreview from "../../components/videos-preview/videos-preview.component";
+import {
+  selectVideoById,
+} from "../../redux/videos/videos.selectors";
 
-function WatchPage() {
+function WatchPage({ currentVideo, selectVideoById, secondOne }) {
   const videoId = useParams().videoId;
-  const [singleVideo, setSingleVideo] = useState({});
-
-  useEffect(() => {
-    Axios.get(getVideoDetailsUrlString(videoId)).then((res) => {
-      setSingleVideo(res.data.items[0]);
-      console.log(res.data);
-    });
-  }, []);
 
   const url = `https://www.youtube.com/embed/${videoId}`;
 
+  let {
+    channelTitle,
+    description,
+    duration,
+    publishedAt,
+    title,
+    views,
+  } = currentVideo;
+  
   return (
     <div className="watch-page-container">
       <div className="video-holder">
@@ -31,15 +32,13 @@ function WatchPage() {
           className="video-player"
         ></iframe>
         <div className="video-info">
-          {singleVideo.snippet && <p className='video-title'>{singleVideo.snippet.title}</p>}
-          {singleVideo.statistics && (
-            <p className='video-views'>{format(singleVideo.statistics.viewCount)}</p>
-          )}
+          <p className="video-title">{title}</p>
+          <p className="video-views">{views}</p>
           <hr />
         </div>
-        <div className='video-footer'>
-          <p className='channel-name'>{singleVideo.snippet.channelTitle && singleVideo.snippet.channelTitle}</p>
-          <p >{singleVideo.snippet.description && singleVideo.snippet.description}</p>
+        <div className="video-footer">
+          <p className="channel-name">{channelTitle}</p>
+          <p>{description.substring(0, 100)}...</p>
         </div>
       </div>
 
@@ -48,4 +47,8 @@ function WatchPage() {
   );
 }
 
-export default WatchPage;
+const mapStateToProps = (state, ownProps) => ({
+  currentVideo: selectVideoById(ownProps.match.params.videoId)(state),
+});
+
+export default connect(mapStateToProps)(WatchPage);
