@@ -8,7 +8,7 @@ import {
   selectVideoById,
 } from "../../redux/videos/videos.selectors";
 
-function WatchPage({ currentVideo, selectVideoById, secondOne }) {
+function WatchPage({ currentVideo, selectVideoById, secondOne, ...props }) {
   const videoId = useParams().videoId;
 
   const url = `https://www.youtube.com/embed/${videoId}`;
@@ -21,13 +21,13 @@ function WatchPage({ currentVideo, selectVideoById, secondOne }) {
     title,
     views,
   } = currentVideo;
-  
+
   return (
     <div className="watch-page-container">
       <div className="video-holder">
         <iframe
           width="100%"
-          height="350"
+          height="400"
           src={url}
           className="video-player"
         ></iframe>
@@ -42,7 +42,7 @@ function WatchPage({ currentVideo, selectVideoById, secondOne }) {
         </div>
       </div>
 
-      <VideosPreview />
+      <VideosPreview videoId={props.match.params.videoId} />
     </div>
   );
 }

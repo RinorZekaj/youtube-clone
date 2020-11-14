@@ -5,7 +5,7 @@ import Axios from "axios";
 const URL = `https://youtube.googleapis.com/youtube/v3/`;
 
 const getVideosUrlString = (q) =>
-  `${URL}search?part=snippet&maxResults=10&q=${q}&type=video&key=${process.env.REACT_APP_YOUTUBE_API}`;
+  `${URL}search?part=snippet&maxResults=12&q=${q}&type=video&key=${process.env.REACT_APP_YOUTUBE_API}`;
 
 export const getVideoDetailsUrlString = (videoIds) =>
   `${URL}videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoIds}&key=${process.env.REACT_APP_YOUTUBE_API}`;
