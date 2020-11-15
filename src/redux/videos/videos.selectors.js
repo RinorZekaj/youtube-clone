@@ -2,8 +2,6 @@ import { createSelector } from "reselect";
 
 const youtubeVideos = (state) => state.videos;
 
-export const secondOne = (state) => state.second;
-
 export const searchVideos = createSelector(
   [youtubeVideos],
   (videosFromSearch) => videosFromSearch.videosData
@@ -18,3 +16,8 @@ export const suggestionVideos = (videoId) =>
   createSelector([searchVideos], (videosFromSearch) =>
     videosFromSearch.filter((video) => video.videoId !== videoId)
   );
+
+export const selectIsLoading = createSelector(
+  [youtubeVideos],
+  (isLoading) => isLoading.isLoading
+);

@@ -4,16 +4,26 @@ import { connect } from "react-redux";
 
 import "./watch-page.styles.scss";
 import VideosPreview from "../../components/videos-preview/videos-preview.component";
-import { selectVideoById } from "../../redux/videos/videos.selectors";
+import {
+  selectVideoById,
+  selectIsLoading,
+} from "../../redux/videos/videos.selectors";
+import Spinner from "../../components/spinner/spinner.component";
 
-function WatchPage({ currentVideo, selectVideoById, secondOne, ...props }) {
+function WatchPage({
+  currentVideo,
+  selectVideoById,
+  secondOne,
+  isLoading,
+  ...props
+}) {
   const [showMore, setShowMore] = useState(false);
 
   const videoId = useParams().videoId;
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   const url = `https://www.youtube.com/embed/${videoId}`;
 
@@ -24,11 +34,16 @@ function WatchPage({ currentVideo, selectVideoById, secondOne, ...props }) {
     publishedAt,
     title,
     views,
-    channelId
+    channelId,
   } = currentVideo;
 
+  const downloadVideoHandler = () => {
+    
+  };
+
   return (
-    <div className="watch-page-container" id='watch-page'>
+    <div className="watch-page-container" id="watch-page">
+      {isLoading && <Spinner />}
       <div className="video-holder">
         <iframe
           width="100%"
@@ -37,16 +52,21 @@ function WatchPage({ currentVideo, selectVideoById, secondOne, ...props }) {
           className="video-player"
         ></iframe>
         <div className="video-info">
-          <p className="video-title">{title}</p>
-          <div className="video-stats">
-            <p className="video-views">{views}&nbsp; &#8226; &nbsp;</p>
-            <p className="video-data">{publishedAt}</p>
+          <div>
+            <p className="video-title">{title}</p>
+            <div className="video-stats">
+              <p className="video-views">{views}&nbsp; &#8226; &nbsp;</p>
+              <p className="video-data">{publishedAt}</p>
+            </div>
           </div>
-          <hr />
+          {/* <button className="download-btn" onClick={downloadVideoHandler}>
+            Download
+          </button> */}
         </div>
+        <hr />
         <div className="video-footer">
           <a
-            target='_blank'
+            target="_blank"
             href={`https://www.youtube.com/channel/${channelId}`}
             className="channel-name"
           >
@@ -63,7 +83,10 @@ function WatchPage({ currentVideo, selectVideoById, secondOne, ...props }) {
               </p>
             )}
             {description.length > 100 && (
-              <p className="show-more" onClick={() => setShowMore(prevState => !prevState)}>
+              <p
+                className="show-more"
+                onClick={() => setShowMore((prevState) => !prevState)}
+              >
                 {showMore ? "Show less" : "Show more"}
               </p>
             )}
@@ -78,6 +101,7 @@ function WatchPage({ currentVideo, selectVideoById, secondOne, ...props }) {
 
 const mapStateToProps = (state, ownProps) => ({
   currentVideo: selectVideoById(ownProps.match.params.videoId)(state),
+  isLoading: selectIsLoading(state),
 });
 
 export default connect(mapStateToProps)(WatchPage);

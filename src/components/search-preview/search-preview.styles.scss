@@ -12,12 +12,18 @@
     padding: 4px 7px;
     border-radius: 5px;
 
+    .nav-link-history {
+      text-decoration: none;
+      color: #000;
+    }
+
     span {
       margin-left: 10px;
       background-color: #efefef;
       padding-left: 8px;
       padding-right: 8px;
       border-radius: 5px;
+      cursor: pointer;
     }
   }
 }

@@ -10,6 +10,19 @@
     
     .video-info {
       text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .download-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: red;
+        border: 1px solid red;
+        font-weight: 500;
+        border-radius: 5px;
+      }
 
       .video-title {
         font-size: 20px;
